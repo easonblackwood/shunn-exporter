@@ -33,7 +33,7 @@ export class ShunnSidebar extends ItemView {
         }));
 
     new Setting(container)
-      .setName("Author Name")
+      .setName("Author name")
       .addText(text => text
         .setValue(this.plugin.settings.author)
         .onChange(async val => {
@@ -54,7 +54,7 @@ export class ShunnSidebar extends ItemView {
         }));
 
     new Setting(container)
-      .setName("Include Address on Title Page")
+      .setName("Include address on title page")
       .addToggle(toggle =>
         toggle
           .setValue(this.plugin.settings.showAddress)
@@ -66,7 +66,7 @@ export class ShunnSidebar extends ItemView {
 
     if (this.plugin.settings.showAddress) {
       new Setting(container)
-        .setName("Address Line 1")
+        .setName("Address line 1")
         .addText(text =>
           text
             .setValue(this.plugin.settings.addressLine1)
@@ -76,7 +76,7 @@ export class ShunnSidebar extends ItemView {
             }));
 
       new Setting(container)
-        .setName("Address Line 2")
+        .setName("Address line 2")
         .addText(text =>
           text
             .setValue(this.plugin.settings.addressLine2)
@@ -86,7 +86,7 @@ export class ShunnSidebar extends ItemView {
             }));
 
       new Setting(container)
-        .setName("Phone Number")
+        .setName("Phone number")
         .addText(text =>
           text
             .setValue(this.plugin.settings.phoneNumber)
@@ -107,7 +107,7 @@ export class ShunnSidebar extends ItemView {
     }
 
     new Setting(container)
-      .setName("Abbreviate Header Title")
+      .setName("Abbreviate header title")
       .addToggle(toggle =>
         toggle
           .setValue(this.plugin.settings.abbreviateTitle)
@@ -119,7 +119,7 @@ export class ShunnSidebar extends ItemView {
 
     if (this.plugin.settings.abbreviateTitle) {
       new Setting(container)
-        .setName("Header Title")
+        .setName("Header title")
         .addText(text =>
           text
             .setValue(this.plugin.settings.headerAbbreviation)
@@ -130,7 +130,7 @@ export class ShunnSidebar extends ItemView {
     }
 
     new Setting(container)
-      .setName("Show Italics as Underline")
+      .setName("Show italics as underline")
       .addToggle(toggle =>
         toggle
           .setValue(this.plugin.settings.underlineItalics)
@@ -140,7 +140,7 @@ export class ShunnSidebar extends ItemView {
           }));
 
     new Setting(container)
-      .setName("Anonymous Manuscript")
+      .setName("Anonymous manuscript")
       .addToggle(toggle =>
         toggle
           .setValue(this.plugin.settings.anonymous)
