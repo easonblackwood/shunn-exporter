@@ -12,8 +12,6 @@ import {
   WidthType,
   BorderStyle,
 } from "docx";
-// @ts-ignore
-import { saveAs } from "file-saver";
 import { ShunnSidebar } from "./shunn-sidebar";
 import { ShunnPluginSettings, DEFAULT_SETTINGS } from "./settings";
 
@@ -22,20 +20,20 @@ export default class ShunnExportPlugin extends Plugin {
   settings: ShunnPluginSettings;
 
   async onload() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData()) as ShunnPluginSettings;
 
     this.registerView("shunn-sidebar", (leaf: WorkspaceLeaf) =>
       new ShunnSidebar(leaf, this)
     );
 
     this.addRibbonIcon("book-open-text", "Shunn Export", () => {
-      this.activateView();
+      void this.activateView();
     });
 
     this.addCommand({
-      id: "open-shunn-export",
-      name: "Open Shunn Exporter",
-      callback: () => this.activateView(),
+      id: "open",
+      name: "Open",
+      callback: () => { void this.activateView(); },
     });
   }
 
@@ -47,7 +45,7 @@ export default class ShunnExportPlugin extends Plugin {
     const leaf = this.app.workspace.getRightLeaf(false);
     if (!leaf) return;
     await leaf.setViewState({ type: "shunn-sidebar", active: true });
-    this.app.workspace.revealLeaf(leaf);
+    void this.app.workspace.revealLeaf(leaf);
   }
 
   async exportCurrentFile() {
@@ -338,7 +336,14 @@ export default class ShunnExportPlugin extends Plugin {
     });
 
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, `${this.settings.title || "story"}.docx`);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${this.settings.title || "story"}.docx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
     new Notice("Exporting!");
   }
 }

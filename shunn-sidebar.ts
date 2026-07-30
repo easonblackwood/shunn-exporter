@@ -61,7 +61,7 @@ export class ShunnSidebar extends ItemView {
           .onChange(async val => {
             this.plugin.settings.showAddress = val;
             await this.plugin.savePluginSettings();
-            this.onOpen();
+            void this.onOpen();
           }));
 
     if (this.plugin.settings.showAddress) {
@@ -114,7 +114,7 @@ export class ShunnSidebar extends ItemView {
           .onChange(async val => {
             this.plugin.settings.abbreviateTitle = val;
             await this.plugin.savePluginSettings();
-            this.onOpen();
+            void this.onOpen();
           }));
 
     if (this.plugin.settings.abbreviateTitle) {
@@ -147,7 +147,7 @@ export class ShunnSidebar extends ItemView {
           .onChange(async val => {
             this.plugin.settings.anonymous = val;
             await this.plugin.savePluginSettings();
-            this.onOpen();
+            void this.onOpen();
           }));
 
     new Setting(container)

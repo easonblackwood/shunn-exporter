@@ -1,11 +1,11 @@
 {
   "id": "shunn-export",
   "name": "Shunn Export",
-  "version": "1.0.0",
-  "main": "main.js",
+  "version": "1.0.1",
   "author": "Eason Blackwood",
   "authorUrl": "https://www.easonblackwood.com",
-  "description": "Export your Obsidian notes as properly formatted Shunn manuscript DOCX files, ready for short fiction submission.",
+  "description": "Export notes as properly formatted Shunn manuscript DOCX files, ready for short fiction submission.",
   "minAppVersion": "0.15.0",
+  "isDesktopOnly": true,
   "fundingUrl": "https://www.easonblackwood.com"
 }
