@@ -1,94 +1,79 @@
-# Obsidian Sample Plugin
+# Shunn Export
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+An [Obsidian](https://obsidian.md) plugin that exports your notes as properly formatted manuscript DOCX files, ready to attach to a short fiction submission.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+The plugin implements [William Shunn's Proper Manuscript Format](https://www.shunn.net/format/) — the industry standard for short fiction submissions to speculative fiction magazines and beyond.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+---
 
-## First time developing plugins?
+## What it does
 
-Quick starting guide for new plugin devs:
+Every mechanical formatting requirement is handled automatically:
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+- **Font and size** — Courier New, Courier, or Times New Roman at 12pt throughout
+- **Line spacing** — double-spaced
+- **Paragraph indent** — ½ inch first-line indent on every body paragraph
+- **Margins** — 1 inch on all four sides
+- **First-page header** — contact block (name, address, phone, email) upper-left; approximate word count upper-right, rounded to the nearest 100
+- **Running header** — `Surname / Title / Page` flush right from page 2 onwards, suppressed on page 1
+- **Title page** — title bold and centred roughly one-third down the page, byline below it
+- **YAML frontmatter** — stripped before export
+- **Scene breaks** — `#`, `* * *`, `---`, or `***` on their own line all become a centred `#`
+- **Scene labels** — Markdown headings (`## Part Two`) become bold centred text with an automatic `#` break before them
+- **Italics** — `*word*` or `_word_` becomes italic (or underline, via toggle)
+- **Em dashes** — `--` is converted to `—`
 
-## Releasing new releases
+---
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+## Installation
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+### Via Obsidian Community Plugins
 
-## Adding your plugin to the community plugin list
+Search for **Shunn Export** in Settings → Community plugins → Browse.
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+### Manual
 
-## How to use
+Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/easonblackwood/shunn-exporter/releases/latest) and copy them to your vault at `.obsidian/plugins/shunn-export/`.
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+---
 
-## Manually installing the plugin
+## Usage
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+Open the sidebar via the ribbon icon or Command Palette (`Open Shunn Exporter`). Fill in your details — these persist between sessions.
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+| Setting | Notes |
+|---|---|
+| Title | Used on the title page and in the running header |
+| Author Name | Legal name or pen name |
+| Font | Courier New (default), Courier, or Times New Roman |
+| Include Address | Toggles the contact block on the first-page header |
+| Abbreviate Header Title | Use a shorter title in the running header |
+| Show Italics as Underline | For markets that prefer underlining |
+| Anonymous Manuscript | Removes byline and surname from header (blind submissions) |
 
-## Funding URL
+Hit **Export** to generate the DOCX. The file saves to your downloads folder named after the story title.
 
-You can include funding URLs where people who use your plugin can financially support it.
+---
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+## Writing conventions
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+The exporter handles all formatting, but a few simple conventions in your Obsidian document are required:
 
-If you have multiple URLs, you can also do:
+**Paragraph breaks** — separate paragraphs with a blank line between them (standard Obsidian behaviour).
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+**Scene breaks** — put `#`, `* * *`, or `---` on its own line with a blank line before and after.
 
-## API Documentation
+**Italics** — use `*word*` or `_word_`. Do not use `**bold**` — there is no bold in Shunn format, and double asterisks will appear literally in the output.
 
-See https://github.com/obsidianmd/obsidian-api
+**Em dashes** — type `--` and the exporter converts it to `—`.
+
+**Smart quotes** — enable Obsidian's smart quotes (Settings → Editor → Smart quotes) so curly quotes are used in the source file.
+
+**One space between sentences** — the exporter does not normalise spacing; two spaces will carry through.
+
+---
+
+## Links
+
+- [Shunn Proper Manuscript Format](https://www.shunn.net/format/)
+- [Eason Blackwood](https://www.easonblackwood.com)

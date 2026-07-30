@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+  "id": "shunn-export",
+  "name": "Shunn Export",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Eason Blackwood",
+  "authorUrl": "https://www.easonblackwood.com",
+  "description": "Export your Obsidian notes as properly formatted Shunn manuscript DOCX files, ready for short fiction submission.",
+  "minAppVersion": "0.15.0",
+  "fundingUrl": "https://www.easonblackwood.com"
 }
