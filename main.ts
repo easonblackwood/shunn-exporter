@@ -337,12 +337,11 @@ export default class ShunnExportPlugin extends Plugin {
 
     const blob = await Packer.toBlob(doc);
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${this.settings.title || "story"}.docx`;
-    document.body.appendChild(a);
+    const a = document.body.createEl("a", {
+      attr: { href: url, download: `${this.settings.title || "story"}.docx` },
+    });
     a.click();
-    document.body.removeChild(a);
+    a.remove();
     URL.revokeObjectURL(url);
     new Notice("Exporting!");
   }

@@ -1,7 +1,7 @@
 {
   "id": "shunn-export",
   "name": "Shunn Export",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Eason Blackwood",
   "authorUrl": "https://www.easonblackwood.com",
   "description": "Export notes as properly formatted Shunn manuscript DOCX files, ready for short fiction submission.",
